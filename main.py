@@ -4,19 +4,21 @@
 Реалізувати контекстний менеджер потрібно 2 способами, за допомогою декоратора contextmanager та за допомогою класу.
 (приклад можно знайти у презентації)
 """
-from contextlib import contextmanager
 
 
-@contextmanager
-def divider_context():
+class DividerContext:
 
-    print(35*"*")
-    yield
-    print(35*"*")
+    def __enter__(self):
+        print(35*"*")
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print(35*"*")
 
 
 my_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
 
-with divider_context() as dc:
+
+with DividerContext() as dc:
     sorted_list = sorted(my_list)
     print(sorted_list)
