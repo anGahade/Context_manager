@@ -1,25 +1,22 @@
 """
-Реалізувати менеджер контексту Timer, який вимірює час виконання блоку коду.
-Контекстний менеджер повинен виводити час, що минув, при виході з контексту.
-Використовуйте контекстний менеджер для вимірювання часу виконання певного фрагменту коду.
+Створіть контекстний менеджер DividerContext, який буде прінтити символ,
+який ми до нього передамо як розділитель для основного блоку коду до та після його виконання.
 Реалізувати контекстний менеджер потрібно 2 способами, за допомогою декоратора contextmanager та за допомогою класу.
+(приклад можно знайти у презентації)
 """
 from contextlib import contextmanager
-import time
 
 
 @contextmanager
-def timer():
-    start = time.time()
-    print("Your operation has started!")
+def divider_context():
+
+    print(35*"*")
     yield
-    end = time.time()
-    print(f"Operation time = {end - start:.2f} seconds")
+    print(35*"*")
 
 
-my_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+my_list = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
 
-with timer() as t:
-    time.sleep(1)
+with divider_context() as dc:
     sorted_list = sorted(my_list)
-
+    print(sorted_list)
